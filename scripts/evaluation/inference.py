@@ -171,7 +171,7 @@ def image_guided_synthesis(model, prompts, videos, noise_shape, n_samples=1, ddi
 
     if not text_input:
         prompts = [""]*batch_size
-
+    #videos的形状是[bs, c, video_frames, h, w]，其实是input img在video_frames维度复制多次
     img = videos[:,:,0] #bchw
     img_emb = model.embedder(img) ## blc
     img_emb = model.image_proj_model(img_emb)
@@ -299,7 +299,7 @@ def run_inference(args, gpu_num, gpu_no):
             videos = data_list_rank[indice:indice+args.bs]
             filenames = filename_list_rank[indice:indice+args.bs]
             if isinstance(videos, list):
-                videos = torch.stack(videos, dim=0).to("cuda")
+                videos = torch.stack(videos, dim=0).to("cuda")#[bs, c, video_frames, h, w]
             else:
                 videos = videos.unsqueeze(0).to("cuda")
 

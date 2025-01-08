@@ -10,7 +10,7 @@ import logging
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from utils.utils import instantiate_from_config
 from utils_train import get_trainer_callbacks, get_trainer_logger, get_trainer_strategy
-from utils_train import set_logger, init_workspace, load_checkpoints
+from utils_train import set_logger, init_workspace, load_checkpoints, load_checkpoints_flowvisual_512
 
 def get_parser(**parser_kwargs):
     parser = argparse.ArgumentParser(**parser_kwargs)
@@ -77,49 +77,14 @@ if __name__ == "__main__":
     logger.info("@lightning version: %s [>=1.8 required]"%(pl.__version__))  
 
 
-    #ori_model_cfg = ["/mnt/workspace/yongfan/code/DynamiCrafter_2/DynamiCrafter/configs/config_1024.yaml"]
-    #ori_configs = [OmegaConf.load(cfg) for cfg in ori_model_cfg]
-    #ori_config = OmegaConf.merge(*ori_configs, cli)
-    #ori_model = instantiate_from_config(ori_config.model)
-    #import time
-    #time.sleep(10)
-    print("====================即将载入原始模型====================\n")
-    #ori_model = load_checkpoints(ori_model, ori_config.model, strict=False)
-    ori_ckpt = "/data/oss_bucket_0/yongfan/weights/DynamiCrafter/DynamiCrafter_512/model.ckpt"
-    ori_model = torch.load(ori_ckpt, map_location="cpu")
-
-    #print("====================即将打印原始模型====================\n")
-    #for k, v in ori_model["state_dict"].items():
-    #    if 'first_stage_model' in k:
-    #        print(k)
-    #with open('/data/oss_bucket_0/yongfan/weights/DynamiCrafter/DynamiCrafter_256/model_state_dict_1024.txt', 'w') as f:
-    #    for k, v in ori_model.state_dict().items():
-    #        # 打印键到文件
-    #        f.write(f'{k}\n')
-    #raise RuntimeError("中断程序")
-    print("====================载入完成，即将替换vae权重====================\n")
-    #  提取 VAE 的权重
-    vae_weights = {k: v for k, v in ori_model["state_dict"].items() if 'first_stage_model' in k}
-    #  替换键名中的 'first_stage_model.' 部分
-    vae_weights = {k.replace('first_stage_model.', ''): v for k, v in vae_weights.items()}
-    del ori_model
-
-    # 这里故意引发一个异常以中断程序
-    #raise RuntimeError("中断程序")
-
-
     ## MODEL CONFIG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     logger.info("***** Configing Model *****")
     config.model.params.logdir = workdir
     model = instantiate_from_config(config.model)
 
-    # 从原模型权重加载vae权重到要训练的模型中
-    model.first_stage_model.load_state_dict(vae_weights, strict=True)
-    #raise RuntimeError("中断程序")
-
     ## load checkpoints
     logger.info("Loading checkpoints from: %s" % config.model)
-    model = load_checkpoints(model, config.model)
+    model = load_checkpoints_flowvisual_512(model, config.model)
     #print("====================即将打印模型====================\n", model)
     #for k, v in model.state_dict().items():
     #    print(k)
@@ -210,7 +175,6 @@ if __name__ == "__main__":
             else:
                 logger.info("<Training in DDPSharded Mode>") ## this is default
                 ## ddpsharded
-                print("=====================>start to train model.......")
                 trainer.fit(model, data)
         except Exception as e:
             logger.error(f"Training failed with exception: {e}")

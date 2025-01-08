@@ -1,12 +1,13 @@
 version=$1 ##1024, 512, 256
 seed=123
-name=dynamicrafter_$1_seed${seed}
+name=flowcrafter_$1_seed${seed}_flow_test_v3
 
-ckpt=weights/DynamiCrafter_$1/model.ckpt
-config=configs/inference_$1_v1.0.yaml
+#ckpt=/mnt/merchant/yongfan/code/DynamiCrafter_2/DynamiCrafter/weights/DynamiCrafter/epoch=109-step=2310.ckpt
+ckpt=/mnt/merchant/yongfan/code/DynamiCrafter_2/DynamiCrafter/weights/DynamiCrafter/epoch=967-step=59000.ckpt
+config=configs/inference_flow_$1_v1.0.yaml
 
-prompt_dir=prompts/$1/
-res_dir="results"
+prompt_dir=prompts/flow_test_v3/
+res_dir="/mnt/merchant/yongfan/code/DynamiCrafter_2/DynamiCrafter/results"
 
 if [ "$1" == "256" ]; then
     H=256
@@ -22,23 +23,7 @@ else
     exit 1
 fi
 
-if [ "$1" == "256" ]; then
-CUDA_VISIBLE_DEVICES=0 python3 scripts/evaluation/inference.py \
---seed ${seed} \
---ckpt_path $ckpt \
---config $config \
---savedir $res_dir/$name \
---n_samples 1 \
---bs 1 --height ${H} --width $1 \
---unconditional_guidance_scale 7.5 \
---ddim_steps 50 \
---ddim_eta 1.0 \
---prompt_dir $prompt_dir \
---text_input \
---video_length 16 \
---frame_stride ${FS}
-else
-CUDA_VISIBLE_DEVICES=0 python3 scripts/evaluation/inference.py \
+CUDA_VISIBLE_DEVICES=2 python3 scripts/evaluation/flow_inference.py \
 --seed ${seed} \
 --ckpt_path $ckpt \
 --config $config \
@@ -53,7 +38,7 @@ CUDA_VISIBLE_DEVICES=0 python3 scripts/evaluation/inference.py \
 --video_length 16 \
 --frame_stride ${FS} \
 --timestep_spacing 'uniform_trailing' --guidance_rescale 0.7 --perframe_ae
-fi
+
 
 
 

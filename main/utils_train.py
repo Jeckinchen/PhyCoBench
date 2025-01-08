@@ -135,23 +135,71 @@ def get_trainer_strategy(lightning_config):
     strategy_cfg = OmegaConf.merge(default_strategy_dict, strategy_cfg)
     return strategy_cfg
 
-def load_checkpoints(model, model_cfg):
+def load_checkpoints_flowvisual_512(model, model_cfg, strict=True):
     if check_config_attribute(model_cfg, "pretrained_checkpoint"):
         pretrained_ckpt = model_cfg.pretrained_checkpoint
+
+        # 检查文件是否存在
         assert os.path.exists(pretrained_ckpt), "Error: Pre-trained checkpoint NOT found at:%s"%pretrained_ckpt
-        mainlogger.info(">>> Load weights from pretrained checkpoint")
+        mainlogger.info(f">>> Load weights from pretrained checkpoint: {pretrained_ckpt}")
 
         pl_sd = torch.load(pretrained_ckpt, map_location="cpu")
+        new_pl_sd = OrderedDict() # 将framestride_embed重命名
+    
+        for k,v in pl_sd["state_dict"].items():
+            new_pl_sd[k] = v
+
+        for k in list(new_pl_sd.keys()):
+            if "framestride_embed" in k:
+                new_key = k.replace("framestride_embed", "fps_embedding")
+                new_pl_sd[new_key] = new_pl_sd[k]
+                del new_pl_sd[k]
+
+        # 将预训练模型存在的模块权重加载到LatentFlowVisualDiffusion模型上
+        model_sd = model.state_dict()
+        for k, v in model_sd.items():
+            if k in list(new_pl_sd.keys()):
+                model_sd[k] = new_pl_sd[k]
+
+        model.load_state_dict(model_sd, strict=False)
+    else:
+        mainlogger.info(">>> Start training from scratch")
+
+    return model
+
+def load_checkpoints(model, model_cfg, strict=True):
+    if check_config_attribute(model_cfg, "pretrained_checkpoint"):
+        pretrained_ckpt = model_cfg.pretrained_checkpoint
+
+        # 检查文件是否存在
+        assert os.path.exists(pretrained_ckpt), "Error: Pre-trained checkpoint NOT found at:%s"%pretrained_ckpt
+        mainlogger.info(f">>> Load weights from pretrained checkpoint: {pretrained_ckpt}")
+
+        pl_sd = torch.load(pretrained_ckpt, map_location="cpu")
+
         try:
             if 'state_dict' in pl_sd.keys():
-                model.load_state_dict(pl_sd["state_dict"], strict=True)
-                mainlogger.info(">>> Loaded weights from pretrained checkpoint: %s"%pretrained_ckpt)
+                try:
+                    model.load_state_dict(pl_sd["state_dict"], strict=strict)
+                    mainlogger.info(">>> Loaded weights from pretrained checkpoint: %s"%pretrained_ckpt)
+                except:
+                    # rename the keys for 256x256 model
+                    new_pl_sd = OrderedDict()
+                    for k,v in pl_sd["state_dict"].items():
+                        new_pl_sd[k] = v
+
+                    for k in list(new_pl_sd.keys()):
+                        if "framestride_embed" in k:
+                            new_key = k.replace("framestride_embed", "fps_embedding")
+                            new_pl_sd[new_key] = new_pl_sd[k]
+                            del new_pl_sd[k]
+                    model.load_state_dict(new_pl_sd, strict=strict)
             else:
                 # deepspeed
                 new_pl_sd = OrderedDict()
                 for key in pl_sd['module'].keys():
                     new_pl_sd[key[16:]]=pl_sd['module'][key]
-                model.load_state_dict(new_pl_sd, strict=True)
+                model.load_state_dict(new_pl_sd, strict=strict)
         except:
             model.load_state_dict(pl_sd)
     else:

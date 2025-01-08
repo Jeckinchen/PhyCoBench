@@ -1,12 +1,12 @@
 version=$1 ##1024, 512, 256
-seed=123
-name=dynamicrafter_$1_seed${seed}
+seed=777
+name=visualcrafter_$1_seed${seed}_visual_test_v3
 
-ckpt=weights/DynamiCrafter_$1/model.ckpt
-config=configs/inference_$1_v1.0.yaml
+ckpt=/mnt/merchant/yongfan/weights/DynamiCrafter/epoch=36-step=400.ckpt
+config=/mnt/merchant/yongfan/code/DynamiCrafter_2/DynamiCrafter/configs/inference_visual_$1_v1.0.yaml
 
-prompt_dir=prompts/$1/
-res_dir="results"
+prompt_dir=prompts/visual_test_v3/
+res_dir="/mnt/merchant/yongfan/code/DynamiCrafter_2/DynamiCrafter/results"
 
 if [ "$1" == "256" ]; then
     H=256
@@ -23,7 +23,7 @@ else
 fi
 
 if [ "$1" == "256" ]; then
-CUDA_VISIBLE_DEVICES=0 python3 scripts/evaluation/inference.py \
+CUDA_VISIBLE_DEVICES=3 python3 scripts/evaluation/visual_inference.py \
 --seed ${seed} \
 --ckpt_path $ckpt \
 --config $config \
@@ -38,7 +38,7 @@ CUDA_VISIBLE_DEVICES=0 python3 scripts/evaluation/inference.py \
 --video_length 16 \
 --frame_stride ${FS}
 else
-CUDA_VISIBLE_DEVICES=0 python3 scripts/evaluation/inference.py \
+CUDA_VISIBLE_DEVICES=3 python3 scripts/evaluation/visual_inference.py \
 --seed ${seed} \
 --ckpt_path $ckpt \
 --config $config \

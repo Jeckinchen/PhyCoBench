@@ -1,12 +1,12 @@
 version=$1 ##1024, 512, 256
 seed=123
-name=dynamicrafter_$1_seed${seed}
+name=2unetcrafter_$1_seed${seed}_keling_score_485epoch
 
-ckpt=weights/DynamiCrafter_$1/model.ckpt
-config=configs/inference_$1_v1.0.yaml
+ckpt=/mnt/workspace/yongfan/weights/DynamiCrafter/epoch=47-step=1750.ckpt
+config=/mnt/workspace/yongfan/code/DynamiCrafter_2/DynamiCrafter/configs/inference_visual_512_v1.0.yaml
 
-prompt_dir=prompts/$1/
-res_dir="results"
+prompt_dir=prompts/keling1.5/
+res_dir="/data/oss_bucket_0/yongfan/flow_crafter/work_dirs/latent_flow_infer/results"
 
 if [ "$1" == "256" ]; then
     H=256
@@ -22,26 +22,13 @@ else
     exit 1
 fi
 
-if [ "$1" == "256" ]; then
-CUDA_VISIBLE_DEVICES=0 python3 scripts/evaluation/inference.py \
+
+CUDA_VISIBLE_DEVICES=0 python3 scripts/evaluation/2unet_inference_video_firstframe.py \
 --seed ${seed} \
 --ckpt_path $ckpt \
+--flow_diffusion_model_ckpt_path /mnt/workspace/yongfan/weights/DynamiCrafter/epoch=485-step=29600.ckpt \
 --config $config \
---savedir $res_dir/$name \
---n_samples 1 \
---bs 1 --height ${H} --width $1 \
---unconditional_guidance_scale 7.5 \
---ddim_steps 50 \
---ddim_eta 1.0 \
---prompt_dir $prompt_dir \
---text_input \
---video_length 16 \
---frame_stride ${FS}
-else
-CUDA_VISIBLE_DEVICES=0 python3 scripts/evaluation/inference.py \
---seed ${seed} \
---ckpt_path $ckpt \
---config $config \
+--flow_diffusion_model_config /mnt/workspace/yongfan/code/DynamiCrafter_2/DynamiCrafter/configs/inference_flow_256_v1.0.yaml \
 --savedir $res_dir/$name \
 --n_samples 1 \
 --bs 1 --height ${H} --width $1 \
@@ -53,7 +40,7 @@ CUDA_VISIBLE_DEVICES=0 python3 scripts/evaluation/inference.py \
 --video_length 16 \
 --frame_stride ${FS} \
 --timestep_spacing 'uniform_trailing' --guidance_rescale 0.7 --perframe_ae
-fi
+
 
 
 

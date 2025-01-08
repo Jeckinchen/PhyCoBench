@@ -44,6 +44,7 @@ class TimestepEmbedSequential(nn.Sequential, TimestepBlock):
                 x = layer(x, context)
                 x = rearrange(x, 'b c f h w -> (b f) c h w')
             else:
+                #print("---------------x shape:", x.shape)
                 x = layer(x)
         return x
 

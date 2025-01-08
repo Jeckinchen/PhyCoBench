@@ -1,0 +1,120 @@
+A little girl throws a tennis ball into the air, and it falls back down.
+A stone rolls down a hill.
+A pinecone falls from a tree to the ground.
+A leaf drifts with the wind in an autumn park, gently landing.
+A book slides off the edge of the table and falls to the ground.
+A banknote falls off the edge of the table.
+A tile slides off the roof.
+A feather falls freely from a height.
+A parachute descends slowly through the air.
+A rubber duck falls freely from a height and lands on the wooden floor.
+A plastic cup falls freely from a height and lands on the wooden floor.
+A small glass marble falls freely from a height and lands on the wooden floor.
+A ring falls freely from a height and lands on the wooden floor.
+A pencil falls freely from a height and lands on the wooden floor.
+A coin falls freely from a height and lands on the wooden floor.
+A rubber duck falls freely from a height and lands on the carpet.
+A plastic cup falls freely from a height and lands on the carpet.
+A small glass marble falls freely from a height and lands on the carpet.
+A ring falls freely from a height and lands on the carpet.
+A pencil falls freely from a height and lands on the carpet.
+A coin falls freely from a height and lands on the carpet.
+A paraglider glides through the air.
+A tennis ball hits the ground and bounces back up.
+Two billiard balls collide on the table and separate.
+A ping pong ball falls from a height onto a table and bounces.
+A basketball is thrown against a wall and bounces back.
+A soccer ball is kicked into the goal, hitting the net.
+A hand shakes three dice in a transparent glass, with the dice colliding inside.
+A person uses a metal hammer to nail a nail into a wooden board.
+A chisel breaks a stone into small pieces.
+A boy throws a dart, and it flies quickly and straight to the dartboard, hitting the center.
+A curling stone slides forward on ice, hitting another stone. Both stones slide in different directions and slowly stop.
+A child jumps on a trampoline, which depresses with each landing and returns to shape as the child jumps up.
+A bowling ball rolls straight down the lane, hitting and knocking down all the pins.
+A man plays billiards, using a cue ball to pocket a black ball.
+A boy bounces a ball, which goes back and forth between the ground and his hand.
+A small rock rolls down a hill and stops upon hitting a large rock below.
+A large rock rolls down a hill, hitting a small rock and causing both to roll.
+The first block is pushed over, causing the following blocks to fall in sequence, creating a domino effect.
+In the kitchen, a plastic bowl is thrown against the wall.
+In the kitchen, a glass bowl is thrown against the wall.
+In the kitchen, a wooden bowl is thrown against the wall.
+A rubber duck is hung on a spring and then released, causing the spring to oscillate up and down.
+A small iron ball is hung on a spring and then released, causing the spring to oscillate violently up and down.
+A pencil is hung on a spring and then released, causing the spring to oscillate slightly up and down.
+A small iron block is suspended on a long rope, pulled to a height, and then begins to swing downward.
+A foam board is suspended on a long rope and begins to swing downward from a height.
+A small wooden block is suspended on a long rope and begins to swing downward from a height.
+A swing starts to sway after being gently pushed.
+A swing is pulled to the highest point and then released, beginning to sway.
+A pendulum swings continuously from side to side.
+A heavy punching bag swings after a boxer's powerful punch.
+A hand is strumming a guitar.
+A little girl is playing the cello.
+A small wooden block slides down a smooth, steep metal slide.
+A stone slides down a smooth, steep metal slide.
+A water bottle slides down a smooth, steep metal slide.
+A book slides down a smooth, steep metal slide.
+A coin slides down a smooth, steep metal slide.
+A small wooden block slides down a rough, gentle dirt slope.
+A stone slides down a rough, gentle dirt slope.
+A water bottle slides down a rough, gentle dirt slope.
+A book slides down a rough, gentle dirt slope.
+A coin slides down a rough, gentle dirt slope.
+A toy car slides along a smooth track.
+A curling stone slides on a smooth ice surface.
+A soccer ball is gently kicked by a little boy on the field, rolling forward.
+A person is skiing down a steep slope, gaining speed.
+Small stones tumble along the ground, blown by the wind.
+A foam board tumbles along the ground, blown by the wind.
+A cardboard box tumbles along the ground, blown by the wind.
+A person is unscrewing a bottle cap.
+A glass is slid forward on a rough wooden table, moving across the surface.
+A glass is slid forward on a smooth metal table, moving across the surface.
+A child is erasing a piece of paper with an eraser.
+A child is drawing with crayons.
+A pinecone rolls down a hill.
+A young boy gracefully skates on the ice rink.
+A person paddles a kayak upstream.
+A person paddles a kayak downstream.
+A lifeguard throws a life buoy, causing a big splash.
+A small branch falls into a pool.
+A coin falls into a pool.
+A ping pong ball falls into a pool.
+A stone falls into a pool.
+A rubber duck toy falls into a pool.
+A plastic bottle falls into a pool.
+A teapot pours hot tea into a cup.
+Milk is poured into coffee.
+Raindrops fall into a pond.
+Water gushes out from the middle of a dam.
+An athlete runs and forcefully throws a javelin, sending it flying far away.
+A girl throws a basketball into the hoop.
+A child swings higher and higher on a swing.
+A young person releases a drawn bow, shooting an arrow swiftly.
+A baseball is hit and flies upward at an angle.
+An athlete throws a shot put high, tracing a parabola in the air.
+An opponent hits the tennis ball back with a flat stroke, sending it straight across the net.
+A girl powerfully hits a tennis ball upward, creating a lob that falls quickly into the opponent's court.
+A boy strikes the tennis ball, hitting a topspin shot that lands deep in the opponent's court.
+A player volleys the incoming ball back, sending it in a slightly curved trajectory.
+A little girl hits an incoming ball from above with a racket, sending it flying swiftly to the opponent's side.
+A soccer ball is kicked forcefully toward the goal by a little boy on the field.
+A man hits a golf ball with a club, lifting it off the ground.
+A man swings a baseball bat, sending the ball flying.
+In a table tennis match, a player focuses on an approaching fast-moving ping pong ball.
+An athlete spins and throws a discus into the air.
+A car drives off a cliff.
+A windmill turns in the wind.
+A top spins quickly on the table.
+A dog shakes water off its body.
+An airplane engine starts, and the blades begin to turn.
+The propeller of a vintage plane on the ground slowly starts to spin.
+The wheels of a moving car spin rapidly.
+The wheels of a moving bicycle are spinning.
+A Ferris wheel rotates slowly.
+A ceiling fan rotates.
+Clothes in a washing machine spin dry.
+A coin spins in a spiral on the table.
+A basketball spins in the air as it falls toward the hoop.
